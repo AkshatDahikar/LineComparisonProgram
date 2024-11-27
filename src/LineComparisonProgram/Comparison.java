@@ -1,6 +1,6 @@
 package LineComparisonProgram;
 
-public class Comparison {
+public class Comparison  {
 	private double  x1,y1,x2,y2;
 	public Comparison(double x1,double y1,double x2,double y2) {
 		this.x1=x1;
@@ -12,21 +12,10 @@ public class Comparison {
 		return Math.sqrt(Math.pow(x2 - x1,2)+Math.pow(y2 - y1, 2));
 	
 }
-@Override
-public boolean equals(Object obj) {
-	if(this == obj) {
-		return true;
-	}
-	if(obj == null || getClass() !=obj.getClass()) {
-	return false;
-	}
-	Comparison otherLine = (Comparison) obj;
-	return Double.compare(this.getLength(),otherLine.getLength())==0;
-	
-}
-@Override
-public int hashCode() {
-	return Double.hashCode(getLength());
+public int comapareTo(Comparison otherLine) {
+double thisLength =this.getLength();
+double otherLength=otherLine.getLength();
+return Double.compare(thisLength, otherLength);
 }
 @Override
 public String toString() {
@@ -42,10 +31,22 @@ public String toString() {
 		System.out.println("Line 2:"+line2);
 		System.out.println("Line 3:"+line3);
 		System.out.println("Comparison Results:");
-		 System.out.println("Line 1 vs Line 2: " + line1.equals(line2));
-		 System.out.println("Line 1 vs Line 3: "+line1.equals(line3));
-		 System.out.println("Line 1 vs Line 3: "+line2.equals(line3));
+		 System.out.println("Line 1 vs Line 2: " +  interpretComparsion(line1.comapareTo(line2)));
+		 System.out.println("Line 1 vs Line 3: "+ interpretComparsion(line1.comapareTo(line3)));
+		 System.out.println("Line 3 vs Line 2: "+ interpretComparsion(line1.comapareTo(line2)));
 		 
 		
+
+	
 	}
-}
+	private static String interpretComparsion(int result) {
+	if(result < 0) {
+		return "Line 1 is less than 2 ";
+		
+	}else if(result > 0) {
+		return "Line 1 is greater than 2";
+		
+	}else {
+		return "Line 1 is equal to Line 2";
+	}
+}}
