@@ -1,8 +1,6 @@
 package LineComparisonProgram;
 
-import javax.sound.sampled.Line;
-
-public class Comparison implements Comparable<Comparison>{
+public class Comparison {
 	private double  x1,y1,x2,y2;
 	public Comparison(double x1,double y1,double x2,double y2) {
 		this.x1=x1;
@@ -11,15 +9,24 @@ public class Comparison implements Comparable<Comparison>{
 		this.y2=y2;
 	}
 	private double getLength() {
-		return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1, 2));
+		return Math.sqrt(Math.pow(x2 - x1,2)+Math.pow(y2 - y1, 2));
 	
 }
 @Override
-public int compareTo(Comparison otherLine) {
-	double thislength =this.getLength();
-	double otherLength= otherLine.getLength();
-	return Double.compare(thislength, otherLength);
+public boolean equals(Object obj) {
+	if(this == obj) {
+		return true;
+	}
+	if(obj == null || getClass() !=obj.getClass()) {
+	return false;
+	}
+	Comparison otherLine = (Comparison) obj;
+	return Double.compare(this.getLength(),otherLine.getLength())==0;
 	
+}
+@Override
+public int hashCode() {
+	return Double.hashCode(getLength());
 }
 @Override
 public String toString() {
@@ -35,9 +42,9 @@ public String toString() {
 		System.out.println("Line 2:"+line2);
 		System.out.println("Line 3:"+line3);
 		System.out.println("Comparison Results:");
-		 System.out.println("Line 1 vs Line 2: " + line1.compareTo(line2));
-		 System.out.println("Line 1 vs Line 2: "+line1.compareTo(line3));
-		 System.out.println("Line 1 vs Line 2: "+line3.compareTo(line2));
+		 System.out.println("Line 1 vs Line 2: " + line1.equals(line2));
+		 System.out.println("Line 1 vs Line 3: "+line1.equals(line3));
+		 System.out.println("Line 1 vs Line 3: "+line2.equals(line3));
 		 
 		
 	}
